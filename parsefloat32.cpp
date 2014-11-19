@@ -1,3 +1,9 @@
+/*
+ * Display detailed information on 32-bit float numbers (IEEE 754).
+ * Input can be the decimal or hexadecimal representation of the float.
+ *
+ * Copyright (c) 2012 Pierre DEJOUE
+ */
 #include <cctype>
 #include <cstdio>
 #include <cstdlib>
