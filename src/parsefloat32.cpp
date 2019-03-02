@@ -10,7 +10,6 @@
 #include <cmath>
 #include <string>
 
-using namespace std;
 
 typedef unsigned int    INT32U;
 typedef float           FP32;
@@ -78,7 +77,7 @@ int main(int argc, char *argv[])
         printf("-----------------------------------------------------------------------------------\n");
         printf("Input: %s\n", input_fp32_str);
 
-        string input_fp32_string(input_fp32_str);
+        std::string input_fp32_string(input_fp32_str);
         if(input_fp32_string.substr(0, 2) == "0x")
         {
             int nb_parsed = sscanf(input_fp32_str + 2, "%08x", &input_fp32.hex);
@@ -92,7 +91,7 @@ int main(int argc, char *argv[])
         }
         else
         {
-            input_fp32.fp  = atof(input_fp32_str);
+            input_fp32.fp  = static_cast<FP32>(atof(input_fp32_str));
         }
 
         // Analysis of the floating-point value
@@ -102,7 +101,7 @@ int main(int argc, char *argv[])
         if(input_fp32.parts.exponent == 0)
         {
             fp_type   = SUBNORMAL;
-            ulp_power = -126 - MANTISSA_SIZE;
+            ulp_power = -126 - static_cast<int>(MANTISSA_SIZE);
 
             if(input_fp32.fp == 0.0)
             {

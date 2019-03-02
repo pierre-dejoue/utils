@@ -16,9 +16,9 @@ int main(int argc, char** argv)
 
     retval=0;
 
-    if(argc==1) { usage(); }
+    if(argc <= 1) { usage(); }
 
-    for(file_idx=1; file_idx<argc; file_idx++)
+    for(file_idx=1; file_idx < (unsigned)argc; file_idx++)
     {
       filename = argv[file_idx];
 
