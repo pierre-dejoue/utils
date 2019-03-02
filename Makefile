@@ -26,10 +26,10 @@ parsefloat32: $(PARSEFP32_OBJS)
 	$(GPP) $< -o $@
 
 .cpp.o:
-	$(GPP) -c $(CPPFLAGS) $< -o $@
+	$(GPP) -c $(CPPFLAGS) src/$< -o $@
 
 .c.o:
-	$(GCC) -c $(CFLAGS) $< -o $@
+	$(GCC) -c $(CFLAGS) src/$< -o $@
 
 clean:
 	rm -f *.o
