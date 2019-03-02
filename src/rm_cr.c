@@ -77,5 +77,5 @@ int main(int argc, char** argv)
 
 
 void usage() {
-    fprintf(stderr, "Usage: rm_cr file_1 ... file_n \nRemove carriage return character from DOS txt files. Pierre Dejoue 2001.\n");
+    fprintf(stderr, "Usage: rm_cr FILE [FILE ...]\n\nRemove carriage return character from DOS text files.\n");
 }

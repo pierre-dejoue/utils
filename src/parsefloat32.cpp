@@ -1,6 +1,6 @@
 /*
- * Display detailed information on 32-bit float numbers (IEEE 754).
- * Input can be the decimal or hexadecimal representation of the float.
+ * Display detailed information about 32-bit float numbers (IEEE 754).
+ * Input can be the decimal or hexadecimal representation of a float.
  *
  * Copyright (c) 2012 Pierre DEJOUE
  */
@@ -8,15 +8,23 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
+#include <iostream>
 #include <string>
 
 
-typedef unsigned int    INT32U;
-typedef float           FP32;
-typedef double          FP64;
+using INT32U = unsigned;
+using FP32 = float;
+using FP64 = double;
 
-const unsigned int MANTISSA_SIZE = 23;
-const unsigned int EXPONENT_SIZE = 8;
+
+static_assert(4 == sizeof(INT32U), "Wrong size of INT32U");
+static_assert(4 == sizeof(FP32),   "Wrong size of FP32");
+static_assert(8 == sizeof(FP64),   "Wrong size of FP64");
+
+
+const unsigned MANTISSA_SIZE = 23u;
+const unsigned EXPONENT_SIZE = 8u;
+
 
 union fp32
 {
@@ -31,6 +39,7 @@ union fp32
     } parts;
 };
 
+
 enum fp_type
 {
     NORMAL,
@@ -42,9 +51,16 @@ enum fp_type
     NOT_A_NUMBER
 };
 
-/******************************************************************************
- * sprint_binary()
- ******************************************************************************/
+
+void print_usage()
+{
+    std::cerr << "Usage: parsefloat32 FLOAT [FLOAT ...]" << std::endl;
+    std::cerr << std::endl;
+    std::cerr << "Display detailed information about 32-bit float numbers (IEEE 754)." << std::endl;
+    std::cerr << "Input can be the decimal or hexadecimal representation of a float." << std::endl;
+}
+
+
 void sprint_binary(char * str, INT32U val, size_t n)
 {
     str[n] = '\0';    // String termination character
@@ -55,9 +71,7 @@ void sprint_binary(char * str, INT32U val, size_t n)
     }
 }
 
-/******************************************************************************
- * MAIN()
- ******************************************************************************/
+
 int main(int argc, char *argv[])
 {
     enum  fp_type fp_type;
@@ -66,8 +80,13 @@ int main(int argc, char *argv[])
     double        ulp;
     char          mantissa_binary[MANTISSA_SIZE+1];
 
-    // For each argument in the command line
+    if (argc <= 1)
+    {
+        print_usage();
+        exit(1);
+    }
 
+    // For each argument in the command line
     for(int arg_idx = 1; argc-- >= 2; arg_idx++)
     {
         // Read input string
