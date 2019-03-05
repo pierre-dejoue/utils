@@ -18,27 +18,6 @@ $ cmake --build . --config Release
 
 ## Usage
 
-### ascii2bin
-
-```
-$ echo 5574696c730a > foo.hex
-$ ascii2bin.exe foo.hex > foo.bin
-$ cat foo.bin
-Utils
-```
-
-### hex
-
-```
-$ hex README.md
-00000000  5574696c 730a3d3d 3d3d3d0a 0a686578    Utils.=====..hex
-00000010  2f62696e 20757469 6c732077 72697474    /bin utils writt
-00000020  656e2069 6e20432f 432b2b0a 0a232320    en in C/C++..##
-00000030  4275696c 640a0a42 75696c64 20757369    Build..Build usi
-00000040  6e672043 4d616b65 3a206874 7470733a    ng CMake: https:
-...       ...                                    ...
-...       ...                                    ...
-```
 
 ### parsefloat32
 
@@ -71,7 +50,43 @@ The input can be the hexadecimal representation of a float. For example the foll
 
 ```
 $ parsefloat32 0xBB03126F
-... same as above ...
+<same as above>
+```
+
+Another example that shows the case of a special value:
+
+```
+$ parsefloat32 0xFF80CAFE
+-----------------------------------------------------------------------------------
+Input: 0xFF80CAFE
+    = NAN (Not A Number)
+    Value64               = -NAN
+    Hex32                 = 0xFF80CAFE
+     [sign]     (1  bit)  = 0x1
+     [exponent] (8  bits) = 0xFF     = 255
+     [mantissa] (23 bits) = 0x00CAFE = 51966
+```
+
+### ascii2bin
+
+```
+$ echo 5574696c730a > foo.hex
+$ ascii2bin.exe foo.hex > foo.bin
+$ cat foo.bin
+Utils
+```
+
+### hex
+
+```
+$ hex README.md
+00000000  5574696c 730a3d3d 3d3d3d0a 0a686578    Utils.=====..hex
+00000010  2f62696e 20757469 6c732077 72697474    /bin utils writt
+00000020  656e2069 6e20432f 432b2b0a 0a232320    en in C/C++..##
+00000030  4275696c 640a0a42 75696c64 20757369    Build..Build usi
+00000040  6e672043 4d616b65 3a206874 7470733a    ng CMake: https:
+...       ...                                    ...
+...       ...                                    ...
 ```
 
 ### rm_cr
